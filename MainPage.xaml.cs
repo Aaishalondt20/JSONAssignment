@@ -17,48 +17,54 @@ namespace JSONAssignment
             BindingContext= this;
         }
         #region Profile Data
-
-        
-            public string _name
+        Profile profile = new Profile();   
+        public class Profile
+        { }
+            public string Name;
+            public string LastName;
+            public string EmailAddress;
+            public string Bio;
+            public string json;
+            public string Name
             {
-                get => _name;
+                get => Name;
 
                 set
                 {
-                    _name = value;
+                    Name = value;
                     OnPropertyChanged();
                 }
             }
 
-            public string _lastname
+            public string Lastname
             {
-                get => _lastname;
+                get => Lastname;
 
                 set
                 {
-                    _lastname = value;
+                    LastName = value;
                     OnPropertyChanged();
                 }
             }
 
-            public string _emailaddress
+            public string Emailaddress
             {
-                get => _emailaddress;
+                get => Emailaddress;
 
                 set
                 {
-                    _emailaddress = value;
+                    EmailAddress = value;
                     OnPropertyChanged();
                 }
             }
 
-            public string _bio
+            public string Bio
             {
-                get => _bio;
+                get => Bio;
 
                 set
                 {
-                    _bio = value;
+                    Bio = value;
                     OnPropertyChanged();
                 }
             }
@@ -69,13 +75,16 @@ namespace JSONAssignment
       
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            Profile profile = new Profile();
+            string json = JsonConvert.SerializeObject(Profile);
+            File.WriteAllText(_fileName, json);
+            SaveButton.Text= File.ReadAllText(_fileName);
          
         }
 
         private void LoadButton_Clicked(object sender, EventArgs e)
         {
-
+            Profile deserializedprofile = JsonConvert.DeserializeObject<Profile>(json);
+            File.ReadAllText(_fileName);
         }
 
         #endregion Buttons
